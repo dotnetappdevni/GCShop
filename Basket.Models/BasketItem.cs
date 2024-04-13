@@ -5,6 +5,9 @@
     {
 
         public string Id { get; set; }
+
+        public string? CustomerId { get; set; }
+        public Guid? BasketId { get; set; }
         public int? ProductId { get; set; }
         public string? ProductName { get; set; }
         public decimal? UnitPrice { get; set; }

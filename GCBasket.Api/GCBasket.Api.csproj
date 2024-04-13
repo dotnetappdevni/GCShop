@@ -12,6 +12,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Basket.Models\Basket.Models.csproj" />
+    <ProjectReference Include="..\GoCompareShop.BasketService\GoCompareShop.BasketService.csproj" />
+    <ProjectReference Include="..\GoCompareShop.CustomerService\GoCompareShop.CustomerService.csproj" />
+    <ProjectReference Include="..\GoCompareShop.GenServices\GoCompareShop.GenServices.csproj" />
   </ItemGroup>
 
 </Project>

@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Basket.Models\Basket.Models.csproj" />
     <ProjectReference Include="..\GoCompareShop.DAL\GoCompareShop.DAL.csproj" />
     <ProjectReference Include="..\GoCompareShop.Models\GoCompareShop.Models.csproj" />
     <ProjectReference Include="..\GoCompareShop.DAL\GoCompareShop.DAL.csproj" />

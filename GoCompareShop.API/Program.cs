@@ -1,6 +1,4 @@
 
- using BookManager.Services;
-using BookManager.Services.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

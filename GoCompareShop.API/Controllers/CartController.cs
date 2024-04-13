@@ -17,10 +17,10 @@ namespace GoCompareShop.API.Controllers
     [ApiController]
     public class CartController : ControllerBase
     {
-        IGoCompareShop _iGoCompareShop;
+        IGoCompareShopBasketInterface _iGoCompareShop;
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public CartController(IGoCompareShop iGoCompareShop)
+        public CartController(IGoCompareShopBasketInterface iGoCompareShop)
         {
             _iGoCompareShop = iGoCompareShop;
         }

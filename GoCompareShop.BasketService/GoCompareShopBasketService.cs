@@ -10,12 +10,13 @@ using System.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using GoCompareShop.Models;
 using GoCompareShop.DAL;
+using Basket.Models;
 
 namespace GoCompareShop.Services
 {
     public class GoCompareShopBasketService : IGoCompareShopBasketInterface
     {
-        IGoCompareShop _iGoCompareShop;
+        IGoCompareShopBasketInterface _iGoCompareShop;
         private readonly ApplicationDBContext _dbContext;
         private static readonly NLog.Logger _logger = LogManager.GetCurrentClassLogger();
         public GoCompareShopBasketService()
@@ -27,6 +28,11 @@ namespace GoCompareShop.Services
             _dbContext = dbContext;
         }
 
+        public void AddBasketItem(BasketItem basketItem)
+        {
+            
+
+        }
         
    
     }
