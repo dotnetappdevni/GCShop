@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace Basket.Models
 {
-    internal class CustomerBasket
+    public class CustomerBasket
     {
-        public string? BuyerId { get; set; }
+        public int Id { get; set; }
+
+        public int? CustomerId { get; set; }
 
         public List<BasketItem> Items { get; set; } = [];
 
         public CustomerBasket() { }
 
-        public CustomerBasket(string customerId)
+        public CustomerBasket(int customerId)
         {
-            BuyerId = customerId;
+            CustomerId = customerId;
         }
 
         public DateTime? DateCreated { get; set; }

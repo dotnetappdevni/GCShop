@@ -1,4 +1,5 @@
-﻿using GoCompareShop.Models;
+﻿using Basket.Models;
+using GoCompareShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace BookManager.Services.Interfaces
     public interface IGoCompareShopBasketInterface
     {
 
-        
+        GoCShopErrorObject RemoveBasketItem(BasketItem basketItem);
+        GoCShopErrorObject AddBasketItem(BasketItem basketItem);
+
 
     }
 }

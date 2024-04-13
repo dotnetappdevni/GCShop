@@ -13,11 +13,11 @@ namespace GoCompareShop.CustomerService.Interface
 
         Customer GetCustomerById(int id);
 
-        ErrorObject Add(Customer customer);
+        GoCShopErrorObject Add(Customer customer);
 
-        ErrorObject Update(Customer customer);
+        GoCShopErrorObject Update(Customer customer);
 
-        ErrorObject Delete(int customerId);
+        GoCShopErrorObject Delete(int customerId);
 
     }
 }

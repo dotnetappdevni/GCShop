@@ -43,9 +43,9 @@ namespace GoCompareShop.CustomerService
         /// </summary>
         /// <param name="customer"></param>
         /// <returns>ErrorObject cuustom error object</returns>
-        public ErrorObject Add(Customer customer)
+        public GoCShopErrorObject Add(Customer customer)
         {
-            ErrorObject errorObject = new ErrorObject();
+            GoCShopErrorObject errorObject = new GoCShopErrorObject();
             _logger.Error("Entered the Update customer method  ");
             try
             {
@@ -66,9 +66,9 @@ namespace GoCompareShop.CustomerService
             return errorObject;
         }
 
-        public ErrorObject Update(Customer customer)
+        public GoCShopErrorObject Update(Customer customer)
         {
-            ErrorObject errorObject = new ErrorObject();
+            GoCShopErrorObject errorObject = new GoCShopErrorObject();
             _logger.Error("Entered the Update customer method  ");
 
             try
@@ -125,9 +125,9 @@ namespace GoCompareShop.CustomerService
         /// </summary>
         /// <param name="customer"></param>
         /// <returns>ErrorObject cuustom error object</returns>
-        public ErrorObject Delete(int customerId)
+        public GoCShopErrorObject Delete(int customerId)
         {
-            ErrorObject errorObject = new ErrorObject();
+            GoCShopErrorObject errorObject = new GoCShopErrorObject();
             var customerToDelete = _dbContext.Customers.Find(customerId);
             _logger.Error("Entered the Delete customer method  ");
             if (customerToDelete != null)

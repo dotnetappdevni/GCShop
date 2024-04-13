@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
- using System.Xml;
+using System.Xml;
 using Microsoft.Extensions.Configuration;
 using GoCompareShop.DAL;
 using System.Reflection.Emit;
 using GoCompareShop.Models;
+using Basket.Models;
 
 namespace GoCompareShop.DAL
 {
@@ -16,6 +17,11 @@ namespace GoCompareShop.DAL
         {
         }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerBasket> CustomerBaskets { get; set; }
+
+        public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<DiscountGroup> DiscountGroups { get; set; }
+
 
         public DbSet<MultiBuyDiscount> MultiBuyDiscounts { get; set; }
 
@@ -25,8 +31,16 @@ namespace GoCompareShop.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                var properties = entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(decimal));
+                foreach (var property in properties)
+                {
+                    modelBuilder.Entity(entityType.Name).Property(property.Name).HasColumnType("decimal(18,2)");
 
+
+                }
+            }
         }
 
         private void SeedUsers(ModelBuilder modelBuilder)
@@ -34,7 +48,7 @@ namespace GoCompareShop.DAL
             //Seeding a  'Administrator' role to AspNetRoles table
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             { Id = "2c5e174e-3b0e-446f-86af-483d56fd7210", Name = "Administrator", NormalizedName = "ADMINISTRATOR".ToUpper() });
-         
+
             //a hasher to hash the password before seeding the user to the db
             var hasher = new PasswordHasher<IdentityUser>();
 
@@ -64,6 +78,7 @@ namespace GoCompareShop.DAL
          );
 
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
