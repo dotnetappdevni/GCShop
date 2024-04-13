@@ -15,9 +15,12 @@ namespace GoCompareShop.DAL
         public ApplicationDBContext(DbContextOptions options) : base(options)
         {
         }
-
-
         public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<MultiBuyDiscount> MultiBuyDiscounts { get; set; }
+
+        public DbSet<StockItem> StockItems { get; set; }
+        public DbSet<Setting> Settings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

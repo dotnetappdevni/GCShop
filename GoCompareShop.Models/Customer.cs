@@ -25,9 +25,9 @@ namespace GoCompareShop.Models
         public string? Country { get; set; }
         public string? PostCode { get; set; }
         public string? Email { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }=false;
 
-        public bool? IsActive { get; set; }
+        public bool? IsActive { get; set; }=true;
 
         public DateTime? DateCreated { get; set; }
 
