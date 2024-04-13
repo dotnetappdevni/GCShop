@@ -7,7 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GoCompareShop.CustomerService
 {
-    public class CustomerServices : ICustomerService
+    public class CustomerServices : ICustomerInterface
     {
         private readonly ApplicationDBContext _dbContext;
         private static readonly NLog.Logger _logger = LogManager.GetCurrentClassLogger();

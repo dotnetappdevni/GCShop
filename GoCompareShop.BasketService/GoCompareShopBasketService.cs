@@ -13,16 +13,16 @@ using GoCompareShop.DAL;
 
 namespace GoCompareShop.Services
 {
-    public class GoCompareShop : IGoCompareShop
+    public class GoCompareShopBasketService : IGoCompareShopBasketInterface
     {
         IGoCompareShop _iGoCompareShop;
         private readonly ApplicationDBContext _dbContext;
         private static readonly NLog.Logger _logger = LogManager.GetCurrentClassLogger();
-        public GoCompareShop()
+        public GoCompareShopBasketService()
         {
 
         }
-        public GoCompareShop(ApplicationDBContext dbContext)
+        public GoCompareShopBasketService(ApplicationDBContext dbContext)
         {
             _dbContext = dbContext;
         }

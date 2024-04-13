@@ -10,6 +10,7 @@ namespace GoCompareShop.Models
     {
         public int Id { get; set; }
 
+        
         public int? CustomerId { get; set; }
 
         public string? SKU { get; set; }

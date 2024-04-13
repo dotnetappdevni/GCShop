@@ -20,9 +20,9 @@ namespace GoCompareShop.API.Controllers
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        private readonly ICustomerService _customerService;
+        private readonly ICustomerInterface _customerService;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerInterface customerService)
         {
             _customerService = customerService;
 

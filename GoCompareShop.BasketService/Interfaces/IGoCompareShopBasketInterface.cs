@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookManager.Services.Interfaces
 {
-    public interface IGoCompareShop
+    public interface IGoCompareShopBasketInterface
     {
 
         

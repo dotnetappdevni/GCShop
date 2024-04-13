@@ -79,7 +79,7 @@ namespace BookManager
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-            builder.Services.AddScoped<ICustomerService, CustomerServices>();
+            builder.Services.AddScoped<ICustomerInterface, CustomerServices>();
             builder.Services.AddAuthentication().AddJwtBearer();
             builder.Services.AddAuthorization();
 

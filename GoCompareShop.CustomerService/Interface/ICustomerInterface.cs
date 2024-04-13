@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GoCompareShop.CustomerService.Interface
 {
-    public interface ICustomerService
+    public interface ICustomerInterface
     {
         List<Customer> GetAll();
 

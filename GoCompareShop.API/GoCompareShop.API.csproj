@@ -37,7 +37,7 @@
     <ProjectReference Include="..\GoCompareShop.DAL\GoCompareShop.DAL.csproj" />
     <ProjectReference Include="..\GoCompareShop.GenServices\GoCompareShop.GenServices.csproj" />
     <ProjectReference Include="..\GoCompareShop.Models\GoCompareShop.Models.csproj" />
-    <ProjectReference Include="..\GoCompareShop.Services\GoCompareShop.CartServices.csproj" />
+    <ProjectReference Include="..\GoCompareShop.Services\GoCompareShop.BasketService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
