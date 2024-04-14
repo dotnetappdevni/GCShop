@@ -13,11 +13,11 @@ using GoCompareShop.GenServices.Interface;
 
 namespace GoCompareShop.GenServices
 {
-    public class EmailService : IEmailService
+    public class EmailSenderBasket : IEmailService
     {
         private static readonly NLog.Logger _logger = LogManager.GetCurrentClassLogger();
         IConfigurationRoot _configuration;
-        public EmailService()
+        public EmailSenderBasket()
         {
             var builder = new ConfigurationBuilder()
                             .SetBasePath(Directory.GetCurrentDirectory())

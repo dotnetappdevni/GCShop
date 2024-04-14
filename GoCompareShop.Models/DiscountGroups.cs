@@ -13,7 +13,7 @@ namespace GoCompareShop.Models
         public int Id { get; set; }
 
         public int? CustomerId { get; set; }
-        public int? Sku { get; set; }
+        public string? SKU { get; set; }
 
         public DateTime? StartDate { get; set; }
 
@@ -32,9 +32,9 @@ namespace GoCompareShop.Models
         [Column(TypeName = "decimal(18,4)")]
         public decimal? MaxiumPurchaseQauntity { get; set; }
 
-        public bool? IsEnabled { get; set; } = true;
+        public bool? IsEnabled { get; set; }
 
-        public bool? IsActive { get; set; } = true;
-        public bool? IsDeleted { get; set; } = false;
+        public bool? IsActive { get; set; } 
+        public bool? IsDeleted { get; set; } 
     }
 }

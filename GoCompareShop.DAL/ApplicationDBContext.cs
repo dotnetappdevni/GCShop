@@ -6,7 +6,8 @@ using Microsoft.Extensions.Configuration;
 using GoCompareShop.DAL;
 using System.Reflection.Emit;
 using GoCompareShop.Models;
-using Basket.Models;
+using GCBasket.Models;
+using GCBasket.Models;
 
 namespace GoCompareShop.DAL
 {
@@ -18,12 +19,16 @@ namespace GoCompareShop.DAL
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerBasket> CustomerBaskets { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
 
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<DiscountGroup> DiscountGroups { get; set; }
 
 
         public DbSet<MultiBuyDiscount> MultiBuyDiscounts { get; set; }
+
+        public DbSet<Till> Tills { get; set; }
+
 
         public DbSet<StockItem> StockItems { get; set; }
         public DbSet<Setting> Settings { get; set; }

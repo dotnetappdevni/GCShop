@@ -2,13 +2,13 @@
 using GoCompareShop.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
-namespace GoCompareShop.API
+namespace GCBasket.Api
 {
-    public class EmailSender : IEmailSender
+    public class EmailSenderBasket : IEmailSender
     {
         private readonly IEmailService _emailService;
 
-        public EmailSender(IEmailService emailService)
+        public EmailSenderBasket(IEmailService emailService)
         {
             _emailService = emailService;
         }

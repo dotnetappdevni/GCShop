@@ -22,11 +22,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoCompareShop.GenServices",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCBasket.Api", "GCBasket.Api\GCBasket.Api.csproj", "{B4947194-BF7C-4331-8D7E-525893563E13}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Models", "Basket.Models\Basket.Models.csproj", "{D7AE24D8-DACE-4F72-B488-871219F1C178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCBasket.Models", "Basket.Models\GCBasket.Models.csproj", "{D7AE24D8-DACE-4F72-B488-871219F1C178}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoCompareShop.BasketService", "GoCompareShop.BasketService\GoCompareShop.BasketService.csproj", "{CC739E96-FE99-45BB-A969-039AA2EDD316}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoCompareShopDTOs", "GoCompareShopDTOs\GoCompareShopDTOs.csproj", "{0DF64A16-80E6-4080-A91A-CE5DF3A9C91D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoCompareShopDTOs", "GoCompareShopDTOs\GoCompareShopDTOs.csproj", "{0DF64A16-80E6-4080-A91A-CE5DF3A9C91D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

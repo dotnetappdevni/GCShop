@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Basket.Models
+namespace GCBasket.Models
 {
     public class CustomerBasket
     {

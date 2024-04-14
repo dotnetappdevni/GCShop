@@ -7,15 +7,15 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 using NLog.Web;
 using NLog.Extensions.Logging;
-using BookManager.API;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using GoCompareShop.DAL;
 using GoCompareShop.GenServices.Interface;
 using GoCompareShop.CustomerService.Interface;
 using GoCompareShop.GenServices;
 using GoCompareShop.CustomerService;
+using GoCompareShop.API;
 
-namespace BookManager
+namespace GoCompareShop
 {
     public class Program
     {
@@ -74,7 +74,7 @@ namespace BookManager
                 loggingBuilder.AddNLog();
             });
 
-            builder.Services.AddTransient<IEmailService, EmailService>();
+            builder.Services.AddTransient<IEmailService, EmailSenderBasket>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddScoped<ICustomerInterface, CustomerServices>();

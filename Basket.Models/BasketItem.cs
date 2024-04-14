@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Basket.Models
+namespace GCBasket.Models
 {
     public class BasketItem
 
@@ -26,6 +26,8 @@ namespace Basket.Models
         [Column(TypeName = "decimal(18,4)")]
         public decimal? OldUnitPrice { get; set; }
         public int? Quantity { get; set; }
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal LinePrice { get; set; }
         public string? PictureUrl { get; set; }
 
         public DateTime? DateCreated { get; set; }
