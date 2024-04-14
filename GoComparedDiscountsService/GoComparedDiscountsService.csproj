@@ -1,12 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
-	  <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.3" />
@@ -22,20 +20,12 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="NLog" Version="5.2.8" />
 		<PackageReference Include="NLog.Extended" Version="4.7.15" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.8" />
-		<PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
-		<PackageReference Include="RichardSzalay.MockHttp" Version="7.0.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
 	</ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Basket.Models\GCBasket.Models.csproj" />
-    <ProjectReference Include="..\GoCompareShop.API\GoCompareShop.API.csproj" />
-    <ProjectReference Include="..\GoCompareShop.BasketService\GoCompareShop.BasketService.csproj" />
-    <ProjectReference Include="..\GoCompareShop.CustomerService\GoCompareShop.CustomerService.csproj" />
-    <ProjectReference Include="..\GoCompareShop.GenServices\GoCompareShop.GenServices.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+	  <ProjectReference Include="..\GoCompareShop.BasketService\GoCompareShop.BasketService.csproj" />
+	  <ProjectReference Include="..\GoCompareShop.DAL\GoCompareShop.DAL.csproj" />
+	</ItemGroup>
 </Project>

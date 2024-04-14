@@ -4,6 +4,6 @@
 If you need to seed the database fresh first delete the data 
 folder in GC.DAL that contains the migratrations ran previous
 
- dotnet ef migrations add newFielsAdded3 --context ApplicationDBContext --output-dir Data\Migrations -p GoCompareShop.DAL -s GoCompareShop.API 
+ dotnet ef migrations add users --context ApplicationDBContext --output-dir Data\Migrations -p GoCompareShop.DAL -s GoCompareShop.API 
 
  dotnet ef database update --context ApplicationDBContext -p GoCompareShop.DAL -s GoCompareShop.API

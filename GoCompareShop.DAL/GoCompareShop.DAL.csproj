@@ -27,7 +27,7 @@
 		<PackageReference Include="Moq" Version="4.20.70" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Basket.Models\GCBasket.Models.csproj" />
+	  <ProjectReference Include="..\Basket.Models\GoCompareShopBasket.Models.csproj" />
 	  <ProjectReference Include="..\GoCompareShop.Models\GoCompareShop.Models.csproj" />
 	</ItemGroup>
 </Project>

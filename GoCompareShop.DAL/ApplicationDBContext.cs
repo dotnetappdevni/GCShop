@@ -46,6 +46,7 @@ namespace GoCompareShop.DAL
 
                 }
             }
+            this.SeedUsers(modelBuilder);
         }
 
         private void SeedUsers(ModelBuilder modelBuilder)
