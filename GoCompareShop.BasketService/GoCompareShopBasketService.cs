@@ -26,6 +26,8 @@ namespace GoCompareShop.Services
         {
 
         }
+
+        
         public GoCompareShopBasketService(ApplicationDBContext dbContext)
         {
             _dbContext = dbContext;
@@ -33,19 +35,19 @@ namespace GoCompareShop.Services
 
         }
 
-        public void ApplyMultiBuyDiscount(BasketItem basketItem)
-        {
-            var checkDiscountGroups = _dbContext.DiscountGroups.Where(w => w.SKU == basketItem.SKU && w.IsActive == true && w.IsDeleted == false).FirstOrDefault();
+       
 
-        }
+ 
 
-     
-        /// <summary>
-        /// Removes the basket item.
-        /// </summary>
-        /// <param name="basketItem">The basket item.</param>
-        /// <returns>Returns a GoCShopErrorObject error object</returns>
-        public  GoCShopErrorObject RemoveBasketItem(BasketItem basketItem)
+
+
+
+    /// <summary>
+    /// Removes the basket item.
+    /// </summary>
+    /// <param name="basketItem">The basket item.</param>
+    /// <returns>Returns a GoCShopErrorObject error object</returns>
+    public  GoCShopErrorObject RemoveBasketItem(BasketItem basketItem)
         {
             string methodName = MethodBase.GetCurrentMethod().Name;
             string className = this.GetType().Name;

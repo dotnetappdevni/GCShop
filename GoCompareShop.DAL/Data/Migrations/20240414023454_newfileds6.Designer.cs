@@ -4,6 +4,7 @@ using GoCompareShop.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoCompareShop.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240414023454_newfileds6")]
+    partial class newfileds6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -611,15 +614,15 @@ namespace GoCompareShop.DAL.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "562710e6-07a7-448d-8911-b02d0b8551ec",
+                            ConcurrencyStamp = "c8c1f5ec-08d6-4506-aed9-f045c783d0bc",
                             Email = "admin@gc.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GC.COM",
                             NormalizedUserName = "admin@gc.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAECDLE7kOJrVYlh/tLPRHz6NCgIWN0Jx8EN5en/+HPJ0KCn6Ijbxj/bimGjBj6PuYGg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAFUIE9sjGAJaUbs7EVo3r6NbYcZne37uFVIstjozEgTqhDtE5EOCKgCbzbD8fHrDw==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "fabc7401-ace5-415c-b1ed-aeb1bbcdb3f1",
+                            SecurityStamp = "92696e12-d582-4979-a9f3-3bf670aa1e13",
                             TwoFactorEnabled = false,
                             UserName = "admin@gc.com"
                         });

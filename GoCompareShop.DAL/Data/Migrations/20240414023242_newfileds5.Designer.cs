@@ -4,6 +4,7 @@ using GoCompareShop.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoCompareShop.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240414023242_newfileds5")]
+    partial class newfileds5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,9 +183,6 @@ namespace GoCompareShop.DAL.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BarCode")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
@@ -611,15 +611,15 @@ namespace GoCompareShop.DAL.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "562710e6-07a7-448d-8911-b02d0b8551ec",
+                            ConcurrencyStamp = "4a178dc2-5ad6-4ace-a9a9-6e0a5c723802",
                             Email = "admin@gc.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GC.COM",
                             NormalizedUserName = "admin@gc.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAECDLE7kOJrVYlh/tLPRHz6NCgIWN0Jx8EN5en/+HPJ0KCn6Ijbxj/bimGjBj6PuYGg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFAf7cycOdysjuLIu265tgF8pBzwKN+HESN4OA1Ro0n3tfaXwB8lO/nA7JtaA6sNIA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "fabc7401-ace5-415c-b1ed-aeb1bbcdb3f1",
+                            SecurityStamp = "472af0d2-6d5a-48eb-b6a6-0b5f7f44eeef",
                             TwoFactorEnabled = false,
                             UserName = "admin@gc.com"
                         });

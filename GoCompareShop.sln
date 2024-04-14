@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoCompareShop.BasketService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoCompareShopDTOs", "GoCompareShopDTOs\GoCompareShopDTOs.csproj", "{0DF64A16-80E6-4080-A91A-CE5DF3A9C91D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoComparedDiscountsService", "GoComparedDiscountsService\GoComparedDiscountsService.csproj", "{736E2708-E94D-44A5-953D-CA00AB84A3A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoComparedDiscounts.Service", "GoComparedDiscountsService\GoComparedDiscounts.Service.csproj", "{736E2708-E94D-44A5-953D-CA00AB84A3A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

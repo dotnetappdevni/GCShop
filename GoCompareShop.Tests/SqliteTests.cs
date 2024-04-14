@@ -2,16 +2,19 @@ using GoCompareShop.Models;
 using System.Collections.Generic;
 using Moq;
 using NUnit;
-using BookManager.Services.Interfaces;
 using RichardSzalay.MockHttp;
-using BookManager.DAL;
 using Microsoft.EntityFrameworkCore;
-using BookManager.Services;
 using System.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.Extensions.Options;
- using Castle.Components.DictionaryAdapter.Xml;
-namespace BookManager.Tests
+using Castle.Components.DictionaryAdapter.Xml;
+using GoCompareShop.DAL;
+using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.Data.Sqlite;
+using GoCompareShop.Services;
+using GCBasket.Models;
+using GoComparedDiscounts.Service;
+namespace GoCompareShop.Tests
 {
     public class BookingServicesTests : IDisposable
     {
@@ -32,93 +35,49 @@ namespace BookManager.Tests
                 context.Database.EnsureCreated();
         }
 
-        /// <summary>
-        /// Books the check in should increase inventory of the same book.
-        /// </summary>
-        /// <param name="expectedCount">The expected count.</param>
-        [TestCase(11)]
-        public async Task Book_CheckedIn_ShouldIncreaseInventory(int expectedCount)
+
+        public void Ensure_GroupDiscountIs_Applied()
         {
-            using (var context = new ApplicationDBContext(_options))
-            {
-                context.BookInventories.Add(new BookInventory
-                {
-
-                    BookId = 4,
-                    BarCode = "1111",
-                    InventoryCount = 10,
-                    IsActive = true,
-                    IsDeleted = false,
-
-                });
-                await context.SaveChangesAsync();
-
-            }
-
             using (var context2 = new ApplicationDBContext(_options))
             {
-                var service = new GoCompareShop(context2);
-                int bookId = 4;
-                int customerId = 10;
-                string barCode = "1111";
+                Basket basket = new Basket();
+                basket = GenTestData();
+               
+                var service = new GoComparedDiscountsService(context2);
+               
                 DateTime returnDate = DateTime.Now;
 
                 // ACT
-                var act = service.CheckIn(customerId, bookId, barCode, returnDate);
+                var act = service.ApplyMultiBuyDiscount(basket,1);
 
 
                 // Assert
-                Assert.AreEqual(act.Data, expectedCount);
+              //  Assert.AreEqual(act.Data, expectedCount);
             }
+
         }
 
+        public Basket GenTestData()
+        {
+            Basket basket = new Basket();
+            basket.Total = 150;
+            basket.Id = 1;
+
+            basket.Status = 1;
+            basket.Items = new List<BasketItem> {  new BasketItem { SKU="A",Description="Test Basket Item",LinePrice=50.00m,Quantity=4,IsActive=true,IsDeleted=false},
+             new BasketItem { SKU="A",Description="Test Basket Item 2",LinePrice=30.00m,Quantity=5,IsActive=true,IsDeleted=false},
+            new BasketItem { SKU="B",Description="Test Basket Item 2",LinePrice=30.00m,Quantity=9,IsActive=true,IsDeleted=false}
+            };
+
+            basket.IsActive = true;
+            basket.IsDeleted = false;
+
+            return basket;
+        }
         public void Dispose()
         {
-         }
-     
-
-        /// <summary>
-        /// Books the check out should decrease inventory of the same book.
-        /// </summary>
-        /// <param name="expectedCount">The expected count.</param>
-        [TestCase(9)]
-        public async Task Book_CheckOut_ShouldDecreaseByNumber(int expectedCount)
-        {
-
-            using (var context = new ApplicationDBContext(_options))
-            {
-                context.BookInventories.Add(new BookInventory
-                {
-
-                    BookId = 3,
-                    BarCode = "1111",
-                    InventoryCount = 10,
-                    IsActive = true,
-                    IsDeleted = false,
-
-                });
-                await context.SaveChangesAsync();
-
-                using (var context2 = new ApplicationDBContext(_options))
-                {
-                    var service = new GoCompareShop(context2);
-                    int bookId = 3;
-                    int customerId = 10;
-                    string barCode = "1111";
-
-                    // ACT
-                    var act = service.CheckOut(customerId, bookId, barCode, 7);
-
-
-                    // Assert
-                    Assert.AreEqual(act.Data, expectedCount);
-                }
-            }
 
         }
-
-      
-
 
         public void UseSqlite()
         {
@@ -132,10 +91,7 @@ namespace BookManager.Tests
                 // Use Sqlite DB.
                 builder.UseSqlite("DataSource=:memory:", x => { });
             }
-            else
-            {
-
-            }
+           
 
             var dbContext = new ApplicationDBContext(builder.Options);
             if (_useSqlite)

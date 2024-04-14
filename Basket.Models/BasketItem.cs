@@ -25,7 +25,9 @@ namespace GCBasket.Models
         public decimal? UnitPrice { get; set; }
         [Column(TypeName = "decimal(18,4)")]
         public decimal? OldUnitPrice { get; set; }
-        public int? Quantity { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal? Quantity { get; set; }
         [Column(TypeName = "decimal(18,4)")]
         public decimal LinePrice { get; set; }
         public string? PictureUrl { get; set; }
