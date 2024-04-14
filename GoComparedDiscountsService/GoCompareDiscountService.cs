@@ -29,12 +29,13 @@ namespace GoComparedDiscounts.Service
 
         /// <summary>
         /// Applies the multi buy discount and check if a customer is passed if not find the sku
+        /// goto the group discount table find the offer from the sku and apply it.
         /// </summary>
         /// <param name="basket">The basket.</param>
         /// <param name="customerId">The customer identifier.</param>
         public decimal? ApplyMultiBuyDiscount(Basket basket, int customerId)
         {
-
+            decimal? offerPrice = 0.00m;
             decimal? saving = 0.00m;
             var test = basket.Items.GroupBy(g => g.SKU);
             foreach (var item in basket.Items)
@@ -58,8 +59,7 @@ namespace GoComparedDiscounts.Service
                         if (numberOfItems > minPurchaseQty)
                         {
                             decimal? totalWithoutOffer = item.LinePrice * item.Quantity;
-
-                            decimal? offerPrice = numberOfOffers * checkDiscountGroups.DiscountValue + remainingItems * item.LinePrice;
+                             offerPrice = numberOfOffers * checkDiscountGroups.DiscountValue + remainingItems * item.LinePrice;
 
                             saving = totalWithoutOffer - offerPrice;
 
@@ -73,12 +73,10 @@ namespace GoComparedDiscounts.Service
                 else
                 {
                     _logger.Warn($"No Discount found for the sku {item.SKU} ,please check the system");
-
-
                 }
             }
 
-            return saving;
+            return offerPrice;
         }
 
 

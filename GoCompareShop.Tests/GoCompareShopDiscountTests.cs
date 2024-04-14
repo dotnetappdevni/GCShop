@@ -16,14 +16,14 @@ using GCBasket.Models;
 using GoComparedDiscounts.Service;
 namespace GoCompareShop.Tests
 {
-    public class BookingServicesTests : IDisposable
+    public class GoCompareShopDiscountTests : IDisposable
     {
         private bool _useSqlite;
 
         private SqliteConnection _connection;
         private DbContextOptions _options;
 
-        public BookingServicesTests()
+        public GoCompareShopDiscountTests()
         {
             _connection = new SqliteConnection("datasource=:memory:");
             _connection.Open();
@@ -65,9 +65,8 @@ namespace GoCompareShop.Tests
 
             basket.Status = 1;
             basket.Items = new List<BasketItem> {  new BasketItem { SKU="A",Description="Test Basket Item",LinePrice=50.00m,Quantity=4,IsActive=true,IsDeleted=false},
-             new BasketItem { SKU="A",Description="Test Basket Item 2",LinePrice=30.00m,Quantity=5,IsActive=true,IsDeleted=false},
-            new BasketItem { SKU="B",Description="Test Basket Item 2",LinePrice=30.00m,Quantity=9,IsActive=true,IsDeleted=false}
-            };
+             new BasketItem { SKU="A",Description="Test Basket Item",LinePrice=50,Quantity=1,IsActive=true,IsDeleted=false},
+             };
 
             basket.IsActive = true;
             basket.IsDeleted = false;
