@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using NLog;
+using System.Linq.Expressions;
 using System.Reflection;
 using static GoCompareShop.Models.Enums;
 
@@ -73,64 +74,83 @@ namespace GoComparedDiscounts.Service
 
 
         /// <summary>
-        /// Calculates the total price applys discount brakes based on string
+        /// Calculates the total discounts and applies them to the basket.
         /// </summary>
-        /// <param name="itemString">The item string.</param>
+        /// <param name="productSku">The product sku.</param>
+        /// <param name="discountTypeEnum">The discount type enum.</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentException">Item string cannot be empty.</exception>
         public GoCCustomReturnObject ApplyDiscounts(string productSku ,DiscountTypeEnum discountTypeEnum)
         {
 
             GoCCustomReturnObject goCCustomReturnObject = new GoCCustomReturnObject();
-            switch (discountTypeEnum)
+            try
             {
+                switch (discountTypeEnum)
+                {
 
-                case DiscountTypeEnum.MultiBuy:
+                    case DiscountTypeEnum.MultiBuy:
 
-                    decimal? totalPrice = 0;
+                        decimal? totalPrice = 0;
 
-                    if (string.IsNullOrWhiteSpace(productSku))
-                    {
-                        goCCustomReturnObject.Data = 0;
-                        return goCCustomReturnObject;
-                    }
-
-
-                    // Count how many times a letter appears
-                    var occurrences = productSku.GroupBy(c => c.ToString())
-                                               .ToDictionary(g => g.Key, g => g.Count());
-
-                    foreach (var item in occurrences)
-                    {
-                        if (items.TryGetValue(item.Key, out Item currentItem))
+                        if (string.IsNullOrWhiteSpace(productSku))
                         {
+                            goCCustomReturnObject.Data = 0;
+                            return goCCustomReturnObject;
+                        }
 
-                            var TEST = item.Value;
 
-                            if (currentItem.DiscountQuantity >  0 && item.Value >= currentItem.DiscountQuantity )
+                        // Count how many times a letter appears
+                        var occurrences = productSku.GroupBy(c => c.ToString())
+                                                   .ToDictionary(g => g.Key, g => g.Count());
+
+                        foreach (var item in occurrences)
+                        {
+                            if (items.TryGetValue(item.Key, out Item currentItem))
                             {
-                                decimal? discountsCount = item.Value / currentItem.DiscountQuantity;
-                                totalPrice += discountsCount * currentItem.DiscountPrice + (item.Value % currentItem.DiscountQuantity) * currentItem.Price;
-                            }
-                            else
-                            {
-                                totalPrice += item.Value * currentItem.Price;
+
+                                var TEST = item.Value;
+
+                                if (currentItem.DiscountQuantity > 0 && item.Value >= currentItem.DiscountQuantity)
+                                {
+                                    decimal? discountsCount = item.Value / currentItem.DiscountQuantity;
+                                    totalPrice += discountsCount * currentItem.DiscountPrice + (item.Value % currentItem.DiscountQuantity) * currentItem.Price;
+                                }
+                                else
+                                {
+                                    totalPrice += item.Value * currentItem.Price;
+                                }
                             }
                         }
-                    }
 
-                    goCCustomReturnObject.Data = totalPrice;
-                    return goCCustomReturnObject;
+                        goCCustomReturnObject.Data = totalPrice;
+                        goCCustomReturnObject.Succeeded = true;
+                        goCCustomReturnObject.Messages.Add(new Error { Field = "message", Message = $"Successfully applied discount to skus {productSku}" });
 
-                default:
-                    break;
+                        return goCCustomReturnObject;
+
+                    default:
+                        break;
 
 
-                   
+                      
+
+                }
+
+
+                return goCCustomReturnObject;
+            }
+            catch (Exception ex)
+            {
+                goCCustomReturnObject.Exception= ex;
+                goCCustomReturnObject.Succeeded = false;
+                goCCustomReturnObject.Errors.Add( new Error { Field="errorMessage" ,Message= "Error occoured in the ApplyDiscounts Method " });
+                _logger.Error("Error occoured in the ApplyDiscounts Method ", ex);
             }
 
             return goCCustomReturnObject;
+
         }
-        }    
+
+    }    
 }
 

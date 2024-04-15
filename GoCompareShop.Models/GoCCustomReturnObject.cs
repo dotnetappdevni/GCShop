@@ -10,6 +10,8 @@ namespace GoCompareShop.Models
     {
         public string Field { get; set; }
         public string Message { get; set; }
+
+        public object data { get; set; }    
     }
     public class GoCCustomReturnObject
     {

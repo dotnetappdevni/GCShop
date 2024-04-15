@@ -37,7 +37,14 @@ namespace GoCompareShop.API.Controllers
             try
             {
                 basketTotals = _goCompareDiscountInterface.ApplyDiscounts(productSkus, Models.Enums.DiscountTypeEnum.MultiBuy);
-                goCCustomReturnObject.Messages.Add(new Models.Error { Field = "basketTotal", Message = basketTotals.Data.ToString()});
+
+                if (basketTotals.Succeeded == true)
+                {
+                    goCCustomReturnObject.Messages.Add(new Models.Error { Field = "basketTotal",Message="Basket total successfully retrieved", data = basketTotals.Data });
+
+                    return Ok(goCCustomReturnObject);
+
+                }
 
             }
             catch (Exception ex)

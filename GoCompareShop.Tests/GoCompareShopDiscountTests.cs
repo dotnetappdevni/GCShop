@@ -39,6 +39,7 @@ namespace GoCompareShop.Tests
             using (var context = new ApplicationDBContext(_options))
                 context.Database.EnsureCreated();
         }
+
         [Test]
         [TestCase("", 0)]
         [TestCase("A", 50)]
@@ -50,7 +51,6 @@ namespace GoCompareShop.Tests
         public void Ensure_MultiByDiscount_IsApplied(string products, decimal? expectedTotal)
         {
             
-
             using (var context2 = new ApplicationDBContext(_options))
             {
                 

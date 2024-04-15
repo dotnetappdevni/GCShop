@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookManager.Services.Interfaces
+namespace GoCompareShop.Services.Interfaces
 {
     public interface IGoCompareShopBasketInterface
     {

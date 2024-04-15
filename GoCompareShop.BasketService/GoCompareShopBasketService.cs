@@ -1,6 +1,5 @@
 ﻿using GoCompareShop.Models;
-using BookManager.Services.Interfaces;
-
+using GoCompareShop.Services.Interfaces;
 using Microsoft.Identity.Client;
 using NLog;
 using System.Collections.Generic;
@@ -27,7 +26,6 @@ namespace GoCompareShop.Services
 
         }
 
-        
         public GoCompareShopBasketService(ApplicationDBContext dbContext)
         {
             _dbContext = dbContext;
@@ -35,19 +33,12 @@ namespace GoCompareShop.Services
 
         }
 
-       
-
- 
-
-
-
-
-    /// <summary>
-    /// Removes the basket item.
-    /// </summary>
-    /// <param name="basketItem">The basket item.</param>
-    /// <returns>Returns a GoCShopErrorObject error object</returns>
-    public  GoCShopErrorObject RemoveBasketItem(BasketItem basketItem)
+        /// <summary>
+        /// Removes the basket item.
+        /// </summary>
+        /// <param name="basketItem">The basket item.</param>
+        /// <returns>Returns a GoCShopErrorObject error object</returns>
+        public GoCShopErrorObject RemoveBasketItem(BasketItem basketItem)
         {
             string methodName = MethodBase.GetCurrentMethod().Name;
             string className = this.GetType().Name;
@@ -74,7 +65,7 @@ namespace GoCompareShop.Services
 
             }
 
-            return  errorReturn;
+            return errorReturn;
 
         }
 
@@ -83,7 +74,7 @@ namespace GoCompareShop.Services
         /// </summary>
         /// <param name="basketItem">The basket item.</param>
         /// <returns>Returns a custom error object</returns>
-        public  GoCShopErrorObject AddBasketItem(BasketItem basketItem)
+        public GoCShopErrorObject AddBasketItem(BasketItem basketItem)
         {
             string methodName = MethodBase.GetCurrentMethod().Name;
             string className = this.GetType().Name;
