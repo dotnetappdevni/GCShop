@@ -4,6 +4,7 @@ using GoCompareShop.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoCompareShop.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240414035954_newtablepricelist")]
+    partial class newtablepricelist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,14 +291,23 @@ namespace GoCompareShop.DAL.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BarCode")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("BasketOfferPrice")
+                        .HasColumnType("decimal(18,4)");
+
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("DiscountPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("DiscountQuantity")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("DiscountType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("DiscountValue")
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
@@ -308,6 +320,12 @@ namespace GoCompareShop.DAL.Data.Migrations
 
                     b.Property<bool?>("IsEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<decimal?>("MaxiumPurchaseQuantity")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<decimal?>("MinimumPurchaseQuantity")
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -353,9 +371,6 @@ namespace GoCompareShop.DAL.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsVisible")
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("MaximumOrderQuantity")
@@ -602,15 +617,15 @@ namespace GoCompareShop.DAL.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "62f56791-069e-4685-9de9-33ab13541db8",
+                            ConcurrencyStamp = "018a918c-60b5-4ca9-a8fa-ff1e28361678",
                             Email = "admin@gc.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GC.COM",
                             NormalizedUserName = "admin@gc.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAX0ZmSoFFgXLqdMXaWMcvUy6AdIwQHdzDST4/FA5ySdRl9SIh+5y9JxGiBJObPUpg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELChQvLF7jePOeQMxinVQCNr3lyfsRsSd+ZjQ/+UjCay2+IthKAX0jQYvQXo/NG7Sw==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "f5a8110c-8c3a-4ff9-ad29-d51578609625",
+                            SecurityStamp = "0d057d37-5663-4b9a-b79e-ab2a832823c3",
                             TwoFactorEnabled = false,
                             UserName = "admin@gc.com"
                         });

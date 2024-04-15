@@ -13,11 +13,10 @@ namespace GoCompareShop.Models
         public string? Name { get; set; }
         public string? Description { get; set; }
         public int? Category { get; set; }
-
+        public string? SKU { get; set; }
         public string? BarCode { get; set; }
 
-        public bool? HasMultiBuyDiscount { get; set; }
-
+ 
         public bool? IsDeleted { get; set; } = false;
 
         public bool? IsActive { get; set; } = true;

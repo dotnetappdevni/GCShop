@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GoComparedDiscountsService\GoComparedDiscounts.Service.csproj" />
     <ProjectReference Include="..\GoCompareShop.BasketService\GoCompareShop.BasketService.csproj" />
     <ProjectReference Include="..\GoCompareShop.CustomerService\GoCompareShop.CustomerService.csproj" />
     <ProjectReference Include="..\GoCompareShop.DAL\GoCompareShop.DAL.csproj" />

@@ -4,6 +4,7 @@ using GoCompareShop.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoCompareShop.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240414030145_newfiledsSKU")]
+    partial class newfiledsSKU
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,14 +291,23 @@ namespace GoCompareShop.DAL.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BarCode")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("BasketOfferPrice")
+                        .HasColumnType("decimal(18,4)");
+
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("DiscountPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("DiscountQuantity")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("DiscountType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("DiscountValue")
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
@@ -308,6 +320,12 @@ namespace GoCompareShop.DAL.Data.Migrations
 
                     b.Property<bool?>("IsEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<decimal?>("MaxiumPurchaseQuantity")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<decimal?>("MinimumPurchaseQuantity")
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -323,7 +341,7 @@ namespace GoCompareShop.DAL.Data.Migrations
                     b.ToTable("DiscountGroups");
                 });
 
-            modelBuilder.Entity("GoCompareShop.Models.PriceList", b =>
+            modelBuilder.Entity("GoCompareShop.Models.MultiBuyDiscount", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -331,60 +349,54 @@ namespace GoCompareShop.DAL.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Availability")
+                    b.Property<string>("BarCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Currency")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DiscountGroupId")
-                        .HasColumnType("int");
+                    b.Property<double>("DiscountPercentage")
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsVisible")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal?>("MaximumOrderQuantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("MinimumOrderQuantity")
+                    b.Property<decimal?>("MaxiumNumerOfItemsForOffer")
                         .HasColumnType("decimal(18,4)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal?>("NumberOfItemsForOffer")
                         .HasColumnType("decimal(18,4)");
 
-                    b.Property<string>("Sku")
+                    b.Property<decimal?>("OfferPrice")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<string>("SKU")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TaxCodeId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("Uom")
-                        .HasColumnType("decimal(18,4)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("PriceLists");
+                    b.ToTable("MultiBuyDiscounts");
                 });
 
             modelBuilder.Entity("GoCompareShop.Models.Setting", b =>
@@ -452,6 +464,9 @@ namespace GoCompareShop.DAL.Data.Migrations
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("HasMultiBuyDiscount")
+                        .HasColumnType("bit");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -602,15 +617,15 @@ namespace GoCompareShop.DAL.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "62f56791-069e-4685-9de9-33ab13541db8",
+                            ConcurrencyStamp = "979123f9-e335-41c6-9091-3f9937c0a931",
                             Email = "admin@gc.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GC.COM",
                             NormalizedUserName = "admin@gc.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAX0ZmSoFFgXLqdMXaWMcvUy6AdIwQHdzDST4/FA5ySdRl9SIh+5y9JxGiBJObPUpg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO0phzvzI5aY4UpuLYisckUahmcxpUcmYjKFxpcCAT3sLUv1K+38h1r1JlNDEv4G7A==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "f5a8110c-8c3a-4ff9-ad29-d51578609625",
+                            SecurityStamp = "7e7d00d5-75ab-4530-a1cc-99a07e68adbf",
                             TwoFactorEnabled = false,
                             UserName = "admin@gc.com"
                         });

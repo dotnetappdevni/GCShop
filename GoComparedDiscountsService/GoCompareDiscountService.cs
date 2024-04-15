@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using NLog;
 using System.Reflection;
+using static GoCompareShop.Models.Enums;
 
 namespace GoComparedDiscounts.Service
 {
@@ -28,68 +29,108 @@ namespace GoComparedDiscounts.Service
         }
 
         /// <summary>
-        /// Applies the multi buy discount and check if a customer is passed if not find the sku
-        /// goto the group discount table find the offer from the sku and apply it.
+        /// Gets the price by product sku.
         /// </summary>
-        /// <param name="basket">The basket.</param>
-        /// <param name="customerId">The customer identifier.</param>
-        public decimal? ApplyMultiBuyDiscount(Basket basket, int customerId)
+        /// <param name="sku">The sku.</param>
+        /// <returns></returns>
+        public void AddPricesBySkus(string skus)
         {
-            decimal? offerPrice = 0.00m;
-            decimal? saving = 0.00m;
-            var test = basket.Items.GroupBy(g => g.SKU);
-            foreach (var item in basket.Items)
+            List<Item> items = new List<Item>();
+            foreach (char sku in skus)
             {
-
-                var checkDiscountGroups = _dbContext.DiscountGroups.Where(w => w.SKU == item.SKU|| w.CustomerId == customerId && w.IsActive == true && w.IsDeleted == false).FirstOrDefault();
-                if (checkDiscountGroups != null)
+                var discountGroups = _dbContext.DiscountGroups.Where(w => w.IsActive == true && w.IsDeleted == false).ToList();
+                foreach (var discountGroup in discountGroups)
                 {
-                    decimal? numberOfItemsPerOffer = checkDiscountGroups.MinimumPurchaseQuantity;
-
-                    decimal? totalNumberOfItems = item.Quantity;
-
-                    decimal? numberOfOffers = totalNumberOfItems / numberOfItemsPerOffer;
-
-                    decimal? remainingItems = totalNumberOfItems % numberOfItemsPerOffer;
-
-                    if (checkDiscountGroups != null)
+                    var priceList = _dbContext.PriceLists.Where(w => w.Sku== discountGroup.SKU).FirstOrDefault();
+                    if (priceList != null)
                     {
-                        var numberOfItems = item.Quantity;
-                        decimal? minPurchaseQty = checkDiscountGroups.MinimumPurchaseQuantity;
-                        if (numberOfItems > minPurchaseQty)
+                        AddItem(new Item
                         {
-                            decimal? totalWithoutOffer = item.LinePrice * item.Quantity;
-                             offerPrice = numberOfOffers * checkDiscountGroups.DiscountValue + remainingItems * item.LinePrice;
-
-                            saving = totalWithoutOffer - offerPrice;
-
-                            Console.WriteLine("Total without offer: $" + totalWithoutOffer);
-                            Console.WriteLine("Offer price for the basket: $" + offerPrice);
-                            Console.WriteLine("You save: $" + saving);
-
+                            Name=discountGroup.SKU,
+                            Sku = discountGroup.SKU,
+                            DiscountQuantity = discountGroup.DiscountQuantity,
+                            DiscountPrice = discountGroup.DiscountPrice,
+                            Price = priceList.Price,
+                            IsActive = true,
+                            IsDeleted = false
                         }
+                     );
+
+
                     }
                 }
-                else
-                {
-                    _logger.Warn($"No Discount found for the sku {item.SKU} ,please check the system");
-                }
+            }
+        }
+
+
+        private readonly Dictionary<string, Item> items = new Dictionary<string, Item>();
+
+        public void AddItem(Item item)
+        {
+            if (!items.ContainsKey(item.Name))
+                items[item.Name] = item;
+        }
+
+
+        /// <summary>
+        /// Calculates the total price applys discount brakes based on string
+        /// </summary>
+        /// <param name="itemString">The item string.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">Item string cannot be empty.</exception>
+        public GoCCustomReturnObject ApplyDiscounts(string productSku ,DiscountTypeEnum discountTypeEnum)
+        {
+
+            GoCCustomReturnObject goCCustomReturnObject = new GoCCustomReturnObject();
+            switch (discountTypeEnum)
+            {
+
+                case DiscountTypeEnum.MultiBuy:
+
+                    decimal? totalPrice = 0;
+
+                    if (string.IsNullOrWhiteSpace(productSku))
+                    {
+                        goCCustomReturnObject.Data = 0;
+                        return goCCustomReturnObject;
+                    }
+
+
+                    // Count how many times a letter appears
+                    var occurrences = productSku.GroupBy(c => c.ToString())
+                                               .ToDictionary(g => g.Key, g => g.Count());
+
+                    foreach (var item in occurrences)
+                    {
+                        if (items.TryGetValue(item.Key, out Item currentItem))
+                        {
+
+                            var TEST = item.Value;
+
+                            if (currentItem.DiscountQuantity >  0 && item.Value >= currentItem.DiscountQuantity )
+                            {
+                                decimal? discountsCount = item.Value / currentItem.DiscountQuantity;
+                                totalPrice += discountsCount * currentItem.DiscountPrice + (item.Value % currentItem.DiscountQuantity) * currentItem.Price;
+                            }
+                            else
+                            {
+                                totalPrice += item.Value * currentItem.Price;
+                            }
+                        }
+                    }
+
+                    goCCustomReturnObject.Data = totalPrice;
+                    return goCCustomReturnObject;
+
+                default:
+                    break;
+
+
+                   
             }
 
-            return offerPrice;
+            return goCCustomReturnObject;
         }
-
-
-        public void GenTestData()
-        {
-            Basket basket = new Basket();
-            basket.Total = 150;
-            basket.Id = 1;
-            basket.Status = 1;
-            basket.Items = new List<BasketItem> {  new BasketItem { SKU="A",Description="Test Basket Item",LinePrice=50.00m,Quantity=3,IsActive=true,IsDeleted=false},
-             new BasketItem { SKU="B",Description="Test Basket Item 2",LinePrice=30.00m,Quantity=5,IsActive=true,IsDeleted=false}};
-            basket.IsActive = true;
-            basket.IsDeleted = false;
-        }
-    }
+        }    
 }
+

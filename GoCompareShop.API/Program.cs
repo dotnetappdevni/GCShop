@@ -14,12 +14,14 @@ using GoCompareShop.CustomerService.Interface;
 using GoCompareShop.GenServices;
 using GoCompareShop.CustomerService;
 using GoCompareShop.API;
+using GoComparedDiscounts.Service.Interface;
+using GoComparedDiscounts.Service;
 
 namespace GoCompareShop
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -31,6 +33,9 @@ namespace GoCompareShop
             builder.Services.AddControllers();
             builder.Services.AddDbContext<ApplicationDBContext>(
            options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+             
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -76,6 +81,7 @@ namespace GoCompareShop
 
             builder.Services.AddTransient<IEmailService, EmailSenderBasket>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<IGoCompareDiscountInterface, GoComparedDiscountsService>();
 
             builder.Services.AddScoped<ICustomerInterface, CustomerServices>();
             builder.Services.AddAuthentication().AddJwtBearer();
@@ -92,7 +98,22 @@ namespace GoCompareShop
             app.UseAuthorization();
             app.UseAuthorization();
             app.MapControllers();
-           app.Run();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDBContext>();
+                logger.LogInformation("Applying migrations...");
+
+                await context.Database.MigrateAsync();
+
+                logger.LogInformation("Migrations applied successfully.");
+
+            }
+
+
+            app.Run();
         }
 
      

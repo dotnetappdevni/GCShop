@@ -24,8 +24,8 @@ namespace GoCompareShop.DAL
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<DiscountGroup> DiscountGroups { get; set; }
 
+        public DbSet<PriceList> PriceLists { get; set; }
 
-        public DbSet<MultiBuyDiscount> MultiBuyDiscounts { get; set; }
 
         public DbSet<Till> Tills { get; set; }
 

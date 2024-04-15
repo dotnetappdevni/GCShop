@@ -8,7 +8,10 @@ namespace GCBasket.Api.Controllers
     public class BasketController : ControllerBase
     {
 
+        public BasketController()
+        {
 
+        }
 
     }
 }

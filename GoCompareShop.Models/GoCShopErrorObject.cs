@@ -15,7 +15,7 @@ namespace GoCompareShop.Models
     {
          
         public GoCShopErrorObject()
-        {
+        {       
             Messages = new List<string>();
             Errors = new List<GCError>();
             ExceptionErrors = new List<string>();

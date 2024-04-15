@@ -4,6 +4,7 @@ using GoCompareShop.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoCompareShop.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240415131848_fieldsnew")]
+    partial class fieldsnew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,11 +294,11 @@ namespace GoCompareShop.DAL.Data.Migrations
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("DiscountPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("DiscountPrice")
+                        .HasColumnType("int");
 
-                    b.Property<decimal?>("DiscountQuantity")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("DiscountQuantity")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
@@ -602,15 +605,15 @@ namespace GoCompareShop.DAL.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "62f56791-069e-4685-9de9-33ab13541db8",
+                            ConcurrencyStamp = "25f93105-e87e-4c44-9cfe-4e3aa1635759",
                             Email = "admin@gc.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GC.COM",
                             NormalizedUserName = "admin@gc.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAX0ZmSoFFgXLqdMXaWMcvUy6AdIwQHdzDST4/FA5ySdRl9SIh+5y9JxGiBJObPUpg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDGCQYr8EDF9Srp4c7ldGJ6fhrQgDVhiCYmmFp0RkuREjZU9+JMaKh2tUVu0Zz1eLA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "f5a8110c-8c3a-4ff9-ad29-d51578609625",
+                            SecurityStamp = "364e0c63-3834-4ecc-b4ad-6f2512df7383",
                             TwoFactorEnabled = false,
                             UserName = "admin@gc.com"
                         });

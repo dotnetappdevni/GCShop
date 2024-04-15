@@ -12,28 +12,18 @@ namespace GoCompareShop.Models
     {
         public int Id { get; set; }
 
+        public String? Name { get; set; }
         public int? CustomerId { get; set; }
         public string? SKU { get; set; }
 
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal? DiscountPrice { get; set; }
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal? DiscountQuantity { get; set; }
         public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
-        public int? BarCode { get; set; }
-
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-
-        [Column(TypeName = "decimal(18,4)")]
-        public decimal? BasketOfferPrice { get; set; }
-
-        public int? DiscountType { get; set; }
-
-        [Column(TypeName = "decimal(18,4)")]
-        public decimal? DiscountValue { get; set; }
-        [Column(TypeName = "decimal(18,4)")]
-        public decimal? MinimumPurchaseQuantity { get; set; }
-        [Column(TypeName = "decimal(18,4)")]
-        public decimal? MaxiumPurchaseQuantity { get; set; }
+        
 
         public bool? IsEnabled { get; set; }
 
