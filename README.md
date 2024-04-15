@@ -1,12 +1,15 @@
-Welcome to the Go Compare APi this api exposes one end point and some identity enpoints 
-not required for the test though.
+Welcome to the Go Compare API. 
+This API exposes one endpoint and some identity endpoints,
+although they are not required for the test. The main 
+endpoint is
 
-Basically an end point 
+api/Basket. 
 
-api Basket
+There is a Swagger UI available
+so you can test the rules that the asserts are tested against,
+and it should work for others. 
 
-That confirms to the rules you gave me
-
+This confirms to the rules you provided.
 ```
 | Item | Price | Offer      |
 |------|-------|------------|
@@ -37,12 +40,9 @@ I have encluded a database because of the dyanmic nature we wanted to achieve.
 So it contains tables such as 
 DiscountGroups
 PriceList
-StockItems.
 
-For the demo a did not stock items as we could hold
-the stock in the discount groups.
+To change the connection strings, you can simply go to appsettings.development and edit the details there, 
 
-To change the connection strings you can simply goto appsettings.development and edit the details there such as 
 
 ```
 {
@@ -50,17 +50,18 @@ To change the connection strings you can simply goto appsettings.development and
     "DefaultConnection": "Data Source=sql5104.site4now.net;Initial Catalog=db_a828de_gcshopapi;User ID=gcclient;Password=gc12345!@;TrustServerCertificate=True"
 }
 ```
-You need to change the data source and the catalog to the one you restore the database to
+
+
+You need to change the data source and the catalog to match the one you restored the database to.
 
 SQL Server 2019 Setup
 
-I am using sql server 2019 and entity framework for the dal. If you go to the db scripts there is a bakup file of db am using 
-sql server 2019.
+I am using SQL Server 2019 and Entity Framework for the DAL. If you go to the DB scripts, there is a backup file of the database I am using with SQL Server 2019.
 
-
-Once you restore please make a login to match the one below which will match the connection string above you will need to change 
-the data source to the one of your local sql 2019 instance.
-
+Once you restore it, please create a login to match the one below, 
+which will correspond to the connection string above. 
+You will need to change the data source to the one of your
+local SQL Server 2019 instance."
 ```
 User ID=gcclient;Password=gc12345!@;
 ```
@@ -70,8 +71,9 @@ I have also setup a small demo api at this location
 
 https://localhost:7066/swagger/index.html
 
-Because I could not use your github actions a would have made one that allowed me to run the tests online so that can 
-see visiblity of tests always passing.
+Because I could not use your GitHub actions,
+I would have made one that allowed me to run the tests online,
+so I can see the visibility of tests always passing.
 
-I have also shown how a would normally seperate projects using folder structures
-and using smaller self contained services and interfaces.
+I have also shown how I would normally separate projects using folder structures and using smaller, 
+self-contained services and interfaces.
